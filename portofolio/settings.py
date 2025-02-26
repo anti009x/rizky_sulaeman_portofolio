@@ -29,6 +29,11 @@ ALLOWED_HOSTS = ["rizky-sulaeman-portofolio.vercel.app",'localhost','127.0.0.1']
 
 
 # Application definition
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,7 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_page',
-    'compressor',  #updated part
+    'tailwind',
+    'theme',
+    'django_browser_reload',
+
 ]
 
 MIDDLEWARE = [
@@ -49,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'portofolio.urls'
@@ -122,18 +131,8 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-
-
-COMPRESS_ROOT = BASE_DIR / 'static'
- 
-COMPRESS_ENABLED = True
- 
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-STATIC_ROOT = BASE_DIR / "static"
+NPM_BIN_PATH = 'C:/Users/Rizky Sulaeman/AppData/Roaming/npm/npm.cmd'
