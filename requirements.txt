@@ -1,3 +1,7 @@
 Django
 django-tailwind
 django-tailwind[reload]
+ollama
+litellm
+bs4
+urllib3

@@ -1,0 +1,255 @@
+{% load static %}
+
+<style>
+.pin-container {
+    position: relative;
+    background-color: rgba(23, 23, 23, 0.8);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform;
+    overflow: hidden;
+    padding: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pin-container::before {
+    content: attr(data-title);
+    position: absolute;
+    top: -1rem;
+    font-size: 0.75rem;
+    background-color: rgba(23, 23, 23, 0.8);
+    color: rgb(229, 231, 235);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pin-container:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+<div class="jumbotron bg-slate-900 min-h-screen flex items-center">
+    <div class="container mx-auto flex flex-col items-center justify-center px-4 sm:px-8 gap-8 md:gap-32 scrollbar-hide">
+         <div class="w-full">
+            <div class="min-h-screen w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8">
+                
+                <div class="pin-container w-full max-w-sm mx-auto" data-href="https://github.com/aceternity/dwi-dharma-expedition">
+                    <div class="flex basis-full flex-col p-4 sm:p-8 tracking-tight text-slate-100/50 sm:basis-1/2 h-80 overflow-y-auto scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                        <h3 class="max-w-xs pb-2 m-0 font-bold text-base text-slate-100">
+                            Mobile Development 
+                        </h3>
+                        <div class="text-base font-normal">
+                            <p class="text-slate-500" style="text-align: justify;">
+                                Mobile and Website Application
+                                Development for PT Dwi Dharma
+                                Djaya Expedition.
+                            </p>
+                            <p class="text-slate-500">
+                                Check out the project on 
+                                <a href="https://github.com/aceternity/dwi-dharma-expedition" class="" target="_blank" rel="noopener noreferrer">
+                                    <img src="{% static 'images/Github.png' %}" alt="GitHub" class="w-4 h-4 inline-block">
+                                </a>
+                            </p>
+                        </div>
+                        <div class="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500">
+                            <img src="{% static 'images/antarin.png' %}" alt="Dwi Dharma Expedition" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pin-container w-full max-w-sm mx-auto" data-href="https://github.com/aceternity/expert-system-smart-health">
+                    <div class="flex basis-full flex-col p-4 sm:p-8 tracking-tight text-slate-100/50 sm:basis-1/2 h-80 overflow-y-auto scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                        <h3 class="max-w-xs pb-2 m-0 font-bold text-base text-slate-100">
+                            Mobile Development 
+                        </h3>
+                        <div class="text-base font-normal">
+                            <p class="text-slate-500" style="text-align: justify;">
+                                AI Application Development
+                                (Expert System) for Smart Health
+                                at Polytechnic Indramayu.
+                            </p>
+                            <p class="text-slate-500">
+                                Check out the project on 
+                                <a href="https://github.com/aceternity/expert-system-smart-health" class="" target="_blank" rel="noopener noreferrer">
+                                    <img src="{% static 'images/Github.png' %}" alt="GitHub" class="w-4 h-4 inline-block">
+                                </a>
+                            </p>
+                        </div>
+                        <div class="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500">
+                            <img src="{% static 'images/smarth.png' %}" alt="Expert System" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pin-container w-full max-w-sm mx-auto" data-href="https://github.com/aceternity/smart-link-system">
+                    <div class="flex basis-full flex-col p-4 sm:p-8 tracking-tight text-slate-100/50 sm:basis-1/2 h-80 overflow-y-auto scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                        <h3 class="max-w-xs pb-2 m-0 font-bold text-base text-slate-100">
+                            Web Development 
+                        </h3>
+                        <div class="text-base font-normal">
+                            <p class="text-slate-500" style="text-align: justify;">
+                                Website Development (Smart Link
+                                System) for PT Cybers Blitz
+                                Nusantara.
+                            </p>
+                            <p class="text-slate-500">
+                                Check out the project on 
+                                <a href="https://github.com/aceternity/smart-link-system" class="" target="_blank" rel="noopener noreferrer">
+                                    <img src="{% static 'images/Github.png' %}" alt="GitHub" class="w-4 h-4 inline-block">
+                                </a>
+                            </p>
+                        </div>
+                        <div class="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500">
+                            <img src="{% static 'images/sls.png' %}" alt="Smart Link System" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pin-container w-full max-w-sm mx-auto" data-href="https://docs.google.com/spreadsheets/d/1hxsTpV-c4RErcmEC37Vg6AAyOzk21MgcYyI--dn4IR4/edit?usp=sharing" target="_blank">
+                    <div class="flex basis-full flex-col p-4 sm:p-8 tracking-tight text-slate-100/50 sm:basis-1/2 w-full h-80 overflow-y-auto scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                        <h3 class="max-w-xs pb-2 m-0 font-bold text-base text-slate-100">
+                            Unit Testing & QA
+                        </h3>
+                        <div class="text-base font-normal">
+                            <p class="text-slate-500" style="text-align: justify;">
+                                Unit Testing & QA for the Final
+                                Project and Thesis: Information
+                                System Website at Polytechnic
+                                Indramayu.
+                            </p>
+                            <p class="text-slate-500">
+                                Check out the project spreadsheet
+                                <a href="https://docs.google.com/spreadsheets/d/1hxsTpV-c4RErcmEC37Vg6AAyOzk21MgcYyI--dn4IR4/edit?usp=sharing" class="" target="_blank" rel="noopener noreferrer" >
+                                    <img src="{% static 'images/spreadsheet.png' %}" alt="GitHub" class="w-4 h-4 inline-block">
+                                </a>
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 flex-1 w-full rounded-lg mt-4">
+                            <div class="bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500 rounded-lg">
+                                <img src="{% static 'images/sista.png' %}" alt="Unit Testing & QA" class="w-full h-full rounded-lg">
+                            </div>
+                            <div class="bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500 rounded-lg">
+                                <img src="{% static 'images/tikom.png' %}" alt="Unit Testing & QA" class="w-full h-full object-cover rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pin-container w-full max-w-sm mx-auto" data-href="https://github.com/aceternity/assistant-mentor" target="_blank">
+                    <div class="flex basis-full flex-col p-4 sm:p-8 tracking-tight text-slate-100/50 sm:basis-1/2 w-full h-80 overflow-y-auto scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                        <h3 class="max-w-xs pb-2 m-0 font-bold text-base text-slate-100">
+                            Web Development
+                        </h3>
+                        <div class="text-base font-normal">
+                            <p class="text-slate-500" style="text-align: justify;">
+                                Assistant Mentor for the
+                                development website for student
+                                data recording at Polytechnic
+                                Harapan Bersama Tegal.
+                            </p>
+                            <p class="text-slate-500">
+                                Check out the project on
+                                <a href="https://github.com/aceternity/assistant-mentor" class="" target="_blank" rel="noopener noreferrer" >
+                                    <img src="{% static 'images/Github.png' %}" alt="GitHub" class="w-4 h-4 inline-block">
+                                </a>
+                            </p>
+                        </div>
+                        <div class="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br  to-blue-500">
+                            <img src="{% static 'images/tegal.png' %}" alt="Assistant Mentor" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="pin-container w-full max-w-sm mx-auto" data-href="https://github.com/aceternity/e-learning-application" target="_blank">
+                    <div class="flex basis-full flex-col p-4 sm:p-8 tracking-tight text-slate-100/50 sm:basis-1/2 w-full h-80 overflow-y-auto scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                        <h3 class="max-w-xs pb-2 m-0 font-bold text-base text-slate-100">
+                            Web Development
+                        </h3>
+                        <div class="text-base font-normal">
+                            <p class="text-slate-500" style="text-align: justify;">
+                                E-Learning Application
+                                Development for SMK Telematika
+                                Indramayu.
+                            </p>
+                            <p class="text-slate-500">
+                                Check out the project on
+                                <a href="https://github.com/aceternity/e-learning-application" class="" target="_blank" rel="noopener noreferrer" >
+                                    <img src="{% static 'images/Github.png' %}" alt="GitHub" class="w-4 h-4 inline-block">
+                                </a>
+                            </p>
+                        </div>
+                        <div class="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br  to-blue-500">
+                            <img src="{% static 'images/elearning1.png' %}" alt="E-Learning Application" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="pin-container w-full max-w-sm mx-auto" data-href="https://github.com/aceternity/autonomous-agent" target="_blank">
+                    <div class="flex basis-full flex-col p-4 sm:p-8 tracking-tight text-slate-100/50 sm:basis-1/2 w-full h-80 overflow-y-auto scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                        <h3 class="max-w-xs pb-2 m-0 font-bold text-base text-slate-100">
+                            Web Development & Desktop Application
+                        </h3>
+                        <div class="text-base font-normal">
+                            <p class="text-slate-500" style="text-align: justify;">
+                                Autonomous Agent Development
+                                Using Reinforcement Learning
+                            </p>
+                            <p class="text-slate-500">
+                                Check out the project on
+                                <a href="https://github.com/aceternity/autonomous-agent" class="" target="_blank" rel="noopener noreferrer" >
+                                    <img src="{% static 'images/Github.png' %}" alt="GitHub" class="w-4 h-4 inline-block">
+                                </a>
+                            </p>
+                        </div>
+                        <div class="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br  to-blue-500">
+                            <img src="{% static 'images/agent.png' %}" alt="Autonomous Agent" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+         </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pinContainers = document.querySelectorAll('.pin-container');
+        
+        pinContainers.forEach(container => {
+            // Get the data attributes
+            const href = container.getAttribute('data-href');
+            
+            // Add mouse move event for 3D effect
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            // Reset transform when mouse leaves
+            container.addEventListener('mouseleave', () => {
+                container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+            
+            // Add click handler for href
+            container.addEventListener('click', () => {
+                window.open(href, '_blank');
+            });
+        });
+    });
+</script>

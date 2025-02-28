@@ -1,7 +1,251 @@
+{% load static %}
 <div class="jumbotron bg-stone-950 min-h-screen flex items-center mt-12 md:mt-5 shadow-[0_-50px_50px_-15px] shadow-cyan-300">
     <div class="container mx-auto flex flex-col items-center justify-center px-4 sm:px-8 gap-8 md:gap-32">
          <div class="w-full text-center">
-             <span class="text-2xl sm:text-4xl md:text-6xl font-bold text-white">Education</span>
+            {% comment %} animation {% endcomment %}
+            <div class="mt-8">
+                <div class="flex h-[20rem] md:h-[40rem] relative items-center justify-center antialiased overflow-hidden">
+                    <button id="mainButton" class="bg-slate-800 md:w-full md:max-w-[350px] w-28 h-28 z-40 md:h-[120px] no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block">
+                        <span class="absolute inset-0 overflow-hidden rounded-full">
+                            <span class="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                        </span>
+                        <div class="relative flex justify-center md:w-[350px] w-28 h-28 text-center md:space-x-2 md:h-[120px] items-center z-10 rounded-full bg-zinc-950/90 py-0.5 px-4 ring-1 ring-white/20 backdrop-blur-sm transition-all duration-300 hover:ring-2 hover:ring-cyan-400/50 hover:bg-zinc-900/80">
+                            <span class="md:text-4xl text-base font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-cyan-300  to-cyan-300 tracking-wider hover:scale-105 transition-transform">
+                         
+                            </span>
+                        </div>
+                    </button>
+                    
+                    <!-- SVG Animation -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <svg width="300" height="200" viewBox="0 0 858 434" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex flex-shrink-0 md:w-[900px] md:h-[500px]">
+                            <!-- Base Paths -->
+                            <path d="M269 220.5H16.5C10.9772 220.5 6.5 224.977 6.5 230.5V398.5" stroke="#1e293b" class="path-base"></path>
+                            <path d="M568 200H841C846.523 200 851 195.523 851 190V40" stroke="#1e293b" class="path-base"></path>
+                            <path d="M425.5 274V333C425.5 338.523 421.023 343 415.5 343H152C146.477 343 142 347.477 142 353V426.5" stroke="#1e293b" class="path-base"></path>
+                            <path d="M493 274V333.226C493 338.749 497.477 343.226 503 343.226H760C765.523 343.226 770 347.703 770 353.226V427" stroke="#1e293b" class="path-base"></path>
+                            <path d="M380 168V17C380 11.4772 384.477 7 390 7H450" stroke="#1e293b" class="path-base"></path>
+
+                            <!-- Animated Gradient Paths -->
+                            <path d="M269 220.5H16.5C10.9772 220.5 6.5 224.977 6.5 230.5V398.5" stroke="url(#grad1)" class="path-animated path1"></path>
+                            <path d="M568 200H841C846.523 200 851 195.523 851 190V40" stroke="url(#grad2)" class="path-animated path2"></path>
+                            <path d="M425.5 274V333C425.5 338.523 421.023 343 415.5 343H152C146.477 343 142 347.477 142 353V426.5" stroke="url(#grad3)" class="path-animated path3"></path>
+                            <path d="M493 274V333.226C493 338.749 497.477 343.226 503 343.226H760C765.523 343.226 770 347.703 770 353.226V427" stroke="url(#grad4)" class="path-animated path4"></path>
+                            <path d="M380 168V17C380 11.4772 384.477 7 390 7H450" stroke="url(#grad5)" class="path-animated path5"></path>
+
+                            <!-- Gradient Definitions -->
+                            <defs>
+                                <linearGradient id="grad1" class="gradient-animate">
+                                    <stop stop-color="#18CCFC" stop-opacity="0"></stop>
+                                    <stop stop-color="#18CCFC"></stop>
+                                    <stop offset="0.325" stop-color="#6344F5"></stop>
+                                    <stop offset="1" stop-color="#AE48FF" stop-opacity="0"></stop>
+                                </linearGradient>
+                                <linearGradient id="grad2" class="gradient-animate">
+                                    <stop offset="0" stop-color="#18CCFC"></stop>
+                                    <stop offset="0.325" stop-color="#6344F5"></stop>
+                                    <stop offset="1" stop-color="#AE48FF"></stop>
+                                </linearGradient>
+                                <linearGradient id="grad3" class="gradient-animate">
+                                    <stop stop-color="#18CCFC" stop-opacity="0"></stop>
+                                    <stop stop-color="#18CCFC"></stop>
+                                    <stop offset="0.325" stop-color="#6344F5"></stop>
+                                    <stop offset="1" stop-color="#AE48FF" stop-opacity="0"></stop>
+                                </linearGradient>
+                                <linearGradient id="grad4" class="gradient-animate">
+                                    <stop stop-color="#18CCFC" stop-opacity="0"></stop>
+                                    <stop stop-color="#18CCFC"></stop>
+                                    <stop offset="0.325" stop-color="#6344F5"></stop>
+                                    <stop offset="1" stop-color="#AE48FF" stop-opacity="0"></stop>
+                                </linearGradient>
+                                <linearGradient id="grad5" class="gradient-animate">
+                                    <stop stop-color="#18CCFC" stop-opacity="0"></stop>
+                                    <stop stop-color="#18CCFC"></stop>
+                                    <stop offset="0.325" stop-color="#6344F5"></stop>
+                                    <stop offset="1" stop-color="#AE48FF" stop-opacity="0"></stop>
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Circles with Buttons -->
+                            <circle cx="851" cy="34" r="4" fill="#334155" stroke="#475569" class="md:r-[6.5] circuit-button"></circle>
+                            <!-- Button for first circle -->
+                            <foreignObject x="760" y="0" width="80" height="32">
+                                <button class="circuit-btn bg-slate-800 w-20 h-8 z-40 no-underline group cursor-pointer relative shadow-md shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block">
+                                    <span class="absolute inset-0 overflow-hidden rounded-full">
+                                        <span class="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                                    </span>
+                                    <div class="relative flex justify-center w-full h-full text-center items-center z-10 rounded-full bg-zinc-950/90 py-1 px-5 ring-1 ring-white/20 backdrop-blur-sm transition-all duration-300 hover:ring-2 hover:ring-cyan-400/50 hover:bg-zinc-900/80">
+                                        <img src="{% static 'images/python.png' %}" alt="Python" class="w-7 h-7 opacity-0 group-[.active]:opacity-100 transition-opacity duration-300">
+                                        
+                                    </div>
+                                </button>
+                            </foreignObject>
+                            
+                            <circle cx="770" cy="427" r="4" fill="#334155" stroke="#475569" class="md:r-[6.5] circuit-button"></circle>
+                            <!-- Button for second circle -->
+                            <foreignObject x="670" y="410" width="80" height="32">
+                                <button class="circuit-btn bg-slate-800 w-20 h-8 z-40 no-underline group cursor-pointer relative shadow-md shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block">
+                                    <span class="absolute inset-0 overflow-hidden rounded-full">
+                                        <span class="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                                    </span>
+                                    <div class="relative flex justify-center w-full h-full text-center items-center z-10 rounded-full bg-zinc-950/90 py-1 px-5 ring-1 ring-white/20 backdrop-blur-sm transition-all duration-300 hover:ring-2 hover:ring-cyan-400/50 hover:bg-zinc-900/80">
+                                        <img src="{% static 'images/c++.png' %}" alt="C++" class="w-6 h-6 opacity-0 group-[.active]:opacity-100 transition-opacity duration-300">
+                                    </div>
+                                </button>
+                            </foreignObject>
+                            
+                            <circle cx="142" cy="427" r="4" fill="#334155" stroke="#475569" class="md:r-[6.5] circuit-button"></circle>
+                            <!-- Button for third circle -->
+                            <foreignObject x="156" y="411" width="80" height="32">
+                                <button class="circuit-btn bg-slate-800 w-20 h-8 z-40 no-underline group cursor-pointer relative shadow-md shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block">
+                                    <span class="absolute inset-0 overflow-hidden rounded-full">
+                                        <span class="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                                    </span>
+                                    <div class="relative flex justify-center w-full h-full text-center items-center z-10 rounded-full bg-zinc-950/90 py-1 px-5 ring-1 ring-white/20 backdrop-blur-sm transition-all duration-300 hover:ring-2 hover:ring-cyan-400/50 hover:bg-zinc-900/80">
+                                        <img src="{% static 'images/js.png' %}" alt="JavaScript" class="w-6 h-6 opacity-0 group-[.active]:opacity-100 transition-opacity duration-300">
+                               
+                                    </div>
+                                </button>
+                            </foreignObject>
+                            
+                            <circle cx="6.5" cy="398.5" r="4" fill="#334155" stroke="#475569" class="md:r-6 circuit-button"></circle>
+                            <!-- Button for fourth circle -->
+                            <foreignObject x="20.5" y="382.5" width="80" height="32">
+                                <button class="circuit-btn bg-slate-800 w-20 h-8 z-40 no-underline group cursor-pointer relative shadow-md shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block">
+                                    <span class="absolute inset-0 overflow-hidden rounded-full">
+                                        <span class="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                                    </span>
+                                    <div class="relative flex justify-center w-full h-full text-center items-center z-10 rounded-full bg-zinc-950/90 py-1 px-5 ring-1 ring-white/20 backdrop-blur-sm transition-all duration-300 hover:ring-2 hover:ring-cyan-400/50 hover:bg-zinc-900/80">
+                                        <img src="{% static 'images/php.png' %}" alt="PHP" class="w-10 h-10 opacity-0 group-[.active]:opacity-100 transition-opacity duration-300 ">
+                        
+                                    </div>
+                                </button>
+                            </foreignObject>
+                            
+                            <circle cx="450" cy="7" r="4" fill="#334155" stroke="#475569" class="md:r-[6.5] circuit-button"></circle>
+                            <!-- Button for fifth circle -->
+                            <foreignObject x="464" y="-9" width="80" height="32">
+                                <button class="circuit-btn bg-slate-800 w-20 h-8 z-40 no-underline group cursor-pointer relative shadow-md shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block">
+                                    <span class="absolute inset-0 overflow-hidden rounded-full">
+                                        <span class="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                                    </span>
+                                    <div class="relative flex justify-center w-full h-full text-center items-center z-10 rounded-full bg-zinc-950/90 py-1 px-5 ring-1 ring-white/20 backdrop-blur-sm transition-all duration-300 hover:ring-2 hover:ring-cyan-400/50 hover:bg-zinc-900/80">
+                                        <img src="{% static 'images/unreal.png' %}" alt="Unreal" class="w-6 h-6 opacity-0 group-[.active]:opacity-100 transition-opacity duration-300" style="filter: invert(1);">
+                                    </div>
+                                </button>
+                            </foreignObject>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- CSS for animations -->
+                <style>
+                    .path-base {
+                        stroke-width: 1;
+                    }
+                    
+                    .path-animated {
+                        stroke-width: 1;
+                        stroke-dasharray: 200;
+                        stroke-dashoffset: 200;
+                    }
+                    
+                    @media (min-width: 768px) {
+                        .path-base {
+                            stroke-width: 1.5;
+                        }
+                        
+                        .path-animated {
+                            stroke-width: 1.5;
+                            stroke-dasharray: 300;
+                            stroke-dashoffset: 300;
+                        }
+                    }
+                    
+                    .path1 {
+                        animation: flowPath 3s infinite ease-in-out;
+                        animation-delay: 0.5s;
+                    }
+                    
+                    .path2 {
+                        animation: flowPath 3s infinite ease-in-out;
+                        animation-delay: 1s;
+                    }
+                    
+                    .path3 {
+                        animation: flowPath 3s infinite ease-in-out;
+                        animation-delay: 1.5s;
+                    }
+                    
+                    .path4 {
+                        animation: flowPath 3s infinite ease-in-out;
+                        animation-delay: 2s;
+                    }
+                    
+                    .path5 {
+                        animation: flowPath 3s infinite ease-in-out;
+                        animation-delay: 2.5s;
+                    }
+                    
+                    @keyframes flowPath {
+                        0% {
+                            stroke-dashoffset: 200;
+                            opacity: 0;
+                        }
+                        20% {
+                            opacity: 1;
+                        }
+                        80% {
+                            opacity: 1;
+                        }
+                        100% {
+                            stroke-dashoffset: -200;
+                            opacity: 0;
+                        }
+                    }
+                    
+                    @media (min-width: 768px) {
+                        @keyframes flowPath {
+                            0% {
+                                stroke-dashoffset: 300;
+                                opacity: 0;
+                            }
+                            20% {
+                                opacity: 1;
+                            }
+                            80% {
+                                opacity: 1;
+                            }
+                            100% {
+                                stroke-dashoffset: -300;
+                                opacity: 0;
+                            }
+                        }
+                    }
+
+                    .circuit-button.active {
+                        fill: #67e8f9 !important; /* cyan-300 */
+                        stroke: #67e8f9 !important;
+                    }
+
+                    .circuit-btn.active {
+                        background-color: #67e8f9 !important;
+                    }
+                </style>
+
+                <script>
+                    document.getElementById('mainButton').addEventListener('click', function() {
+                        // Toggle active state for all circuit buttons and circles
+                        document.querySelectorAll('.circuit-button').forEach(circle => {
+                            circle.classList.toggle('active');
+                        });
+                        
+                        document.querySelectorAll('.circuit-btn').forEach(button => {
+                            button.classList.toggle('active');
+                        });
+                    });
+                </script>
+            </div>
          </div>
     </div>
 </div>

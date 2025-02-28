@@ -1,7 +1,78 @@
-<div class="jumbotron bg-stone-950 min-h-screen flex items-center">
-    <div class="container mx-auto flex flex-col items-center justify-center px-4 sm:px-8 gap-8 md:gap-32">
-         <div class="w-full text-center">
-             <span class="text-2xl sm:text-4xl md:text-6xl font-bold text-white">Education</span>
-         </div>
+{% load static %}
+<div class="jumbotron bg-stone-950 min-h-screen pt-12">
+    <div class="container mx-auto px-4">
+        <div class="w-full text-center">
+            <h1 class="text-2xl sm:text-4xl md:text-6xl font-bold text-white mb-4 relative inline-block">
+                <span class="relative z-10 delay-[300ms] duration-[600ms] taos:translate-y-[100%] taos:opacity-0" data-taos-offset="300">Education</span>
+                <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transform animate-pulse"></span>
+                <span class="absolute -left-4 -top-4 w-12 h-12 rounded-full bg-blue-500/10 animate-ping"></span>
+            </h1>
+            <div class="w-full flex flex-col md:flex-row justify-center items-center gap-8 mt-8">
+                <div class="flex flex-col sm:flex-row items-center gap-5 md:gap-8">
+                    <div class="w-full sm:w-auto delay-[300ms] duration-[600ms] taos:translate-y-[100%] taos:opacity-0" data-taos-offset="300">
+                        <button class="w-full text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-blue-700 me-2 shadow-md shadow-blue-500/50 transition-all duration-300 hover:scale-105" aria-label="Elementary School Sindangkerta">
+                            <div class="flex flex-col justify-between flex-grow mx-2 py-2">
+                                <div class="flex justify-center items-center mb-2">
+                                    <img src="{% static 'images/sd.png' %}" alt="SD Sindangkerta" class="w-20 h-20 object-contain" loading="lazy">
+                                </div>
+                                <span class="text-base sm:text-lg md:text-xl font-semibold mb-1">SD SINDANGKERTA</span>
+                                <span class="text-sm sm:text-base text-gray-800">Elementary School</span>
+                                <span class="text-xs sm:text-sm text-gray-700 italic">Sindangkerta, West Java</span>
+                                <span class="text-base sm:text-lg md:text-xl font-semibold mt-1">2009 - 2015</span>
+                          
+                            </div>
+                        </button>
+                    </div>
+                
+                    <!-- Connecting line for flowchart effect (only visible on small screens and up) -->
+                    <div class="hidden sm:block w-32 h-1 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-300 rounded-full shadow-lg shadow-blue-500/20 animate-[pulse_3s_ease-in-out_infinite]"></div>
+                    <div class="w-full sm:w-auto sm:mt-16 md:mt-32 delay-[300ms] duration-[600ms] taos:translate-y-[100%] taos:opacity-0" data-taos-offset="300">
+                        <button class="w-full text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-blue-700 me-2 shadow-md shadow-blue-500/50 transition-all duration-300 hover:scale-105" aria-label="Elementary School Sindangkerta">
+                            <div class="flex flex-col justify-between flex-grow mx-2 py-2">
+                                <div class="flex justify-center items-center mb-2">
+                                    <img src="{% static 'images/mts.png' %}" alt="SD Sindangkerta" class="w-20 h-20 object-contain" loading="lazy">
+                                </div>
+                                <span class="text-base sm:text-lg md:text-xl font-semibold mb-1">MTS 7 NEGERI INDRAMAYU</span>
+                                <span class="text-sm sm:text-base text-gray-800">Junior High School</span>
+                                <span class="text-xs sm:text-sm text-gray-700 italic">Lohbener, West Java</span>
+                                <span class="text-base sm:text-lg md:text-xl font-semibold mt-1">2015 - 2018</span>
+                         
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden sm:block w-32 h-1 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-300 rounded-full shadow-lg shadow-blue-500/20 animate-[pulse_3s_ease-in-out_infinite]"></div>
+                <div class="flex flex-col sm:flex-row items-center gap-5 md:gap-8 mt-5 md:mt-0">
+                    <div class="w-full sm:w-auto delay-[300ms] duration-[600ms] taos:translate-y-[100%] taos:opacity-0" data-taos-offset="300">
+                        <button class="w-full text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-blue-700 me-2 shadow-md shadow-blue-500/50 transition-all duration-300 hover:scale-105" aria-label="Elementary School Sindangkerta">
+                            <div class="flex flex-col justify-between flex-grow mx-2 py-2">
+                                <div class="flex justify-center items-center mb-2">
+                                    <img src="{% static 'images/smk.png' %}" alt="SD Sindangkerta" class="w-20 h-20 object-contain" loading="lazy">
+                                </div>
+                                <span class="text-base sm:text-lg md:text-xl font-semibold mb-1">SMK TELEMATIKA INDRAMAYU</span>
+                                <span class="text-sm sm:text-base text-gray-800">Senior High School</span>
+                                <span class="text-xs sm:text-sm text-gray-700 italic">Lohbener, West Java</span>
+                                <span class="text-base sm:text-lg md:text-xl font-semibold mt-1">2018 - 2021</span>
+                            </div>
+                        </button>
+                    </div>
+                    <!-- Connecting line for flowchart effect (only visible on small screens and up) -->
+                    <div class="hidden sm:block w-32 h-1 bg-gradient-to-r from-blue-500 via-teal-400 to-cyan-300 rounded-full shadow-lg shadow-blue-500/20 animate-[pulse_3s_ease-in-out_infinite]"></div>
+                    <div class="w-full sm:w-auto sm:mt-16 md:mt-32 delay-[300ms] duration-[600ms] taos:translate-y-[100%] taos:opacity-0" data-taos-offset="300">
+                        <button class="w-full text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-blue-700 me-2 shadow-md shadow-blue-500/50 transition-all duration-300 hover:scale-105" aria-label="Elementary School Sindangkerta">
+                            <div class="flex flex-col justify-between flex-grow mx-2 py-2">
+                                <div class="flex justify-center items-center mb-2">
+                                    <img src="{% static 'images/polindra.png' %}" alt="SD Sindangkerta" class="w-20 h-20 object-contain" loading="lazy">
+                                </div>
+                                <span class="text-base sm:text-lg md:text-xl font-semibold mb-1">POLITEKNIK NEGERI INDRAMAYU</span>
+                                <span class="text-sm sm:text-base text-gray-800">Vocational High School</span>
+                                <span class="text-xs sm:text-sm text-gray-700 italic">Indramayu, West Java</span>
+                                <span class="text-base sm:text-lg md:text-xl font-semibold mt-1">2021 - 2024</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

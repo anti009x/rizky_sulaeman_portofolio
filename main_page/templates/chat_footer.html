@@ -1,0 +1,193 @@
+{% load static %}
+<div class="flex items-center justify-center rounded-sm mx-auto w-full px-4 sm:px-6 lg:px-8 mb-7">
+  
+    <div class="w-full px-2 sm:px-4 md:px-6 lg:px-8">
+        <div class="relative w-full max-w-3xl mx-auto px-4 py-3 bg-gradient-to-br from-purple-300 via-pink-300 to-red-300 rounded-xl shadow-lg transition-all duration-300 focus-within:ring-4 focus-within:ring-purple-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600">
+            <textarea id="chat-input" rows="1" placeholder="Send a message..." 
+                oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px';" 
+                class="block w-full p-3 bg-transparent text-sky-300 placeholder-gray-500 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-purple-500" 
+                style="overflow:hidden;"></textarea>
+            
+            <button type="submit" class="absolute right-4 bottom-4 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 p-2 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <img src="{% static 'images/message.png' %}" alt="Send" width="23" class="filter invert">
+            </button>
+            
+            <div class="flex flex-wrap items-center mt-4 gap-3 " >
+
+
+                <div class="relative inline-flex items-center">
+                    <input id="file_input" name="file" type="file" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                    <img src="{% static 'images/plus.png' %}" alt="Add" width="15" class="filter invert absolute " style="left: 50%; transform: translateX(-50%);">
+                </div>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                    const fileInput = document.getElementById('file_input');
+                    const text_area = document.getElementById('chat-input');
+                    let fileData = null;
+                    let previewContainer = null;
+                    
+                    // Create a FormData object to store files
+                    let formData = new FormData();
+                    
+                    // Hide the default file button/text by injecting CSS
+                    const style = document.createElement('style');
+                    style.type = 'text/css';
+                    style.innerHTML = "#file_input::-webkit-file-upload-button, #file_input::file-selector-button { display: none; } #file_input { color: transparent; width: 40px; }";
+                    document.head.appendChild(style);
+
+                    fileInput.addEventListener('change', function() {
+                      // Remove any existing preview
+                      if (previewContainer) {
+                        previewContainer.remove();
+                        previewContainer = null;
+                      }
+
+                      if (this.files.length > 0) {
+                        // Get the file object directly
+                        const file = this.files[0];
+                        fileData = file;
+                        
+                        // Add the file object to FormData (this is what you'll send to your server)
+                        formData.set('file', file);
+
+                        // Create a preview container
+                        previewContainer = document.createElement('div');
+                        previewContainer.className = 'file-preview mt-2 p-2 bg-gray-100 dark:bg-gray-700 rounded-lg flex flex-col sm:flex-row items-center gap-2 mb-4';
+                        
+                        // For images, use URL.createObjectURL to display the photo preview
+                        if (file.type.startsWith('image/')) {
+                          const img = document.createElement('img');
+                          img.src = URL.createObjectURL(file);
+                          img.className = 'w-10 h-10 object-cover rounded';
+                          previewContainer.appendChild(img);
+                        } else {
+                          // For other file types, display a generic file icon
+                          const fileIcon = document.createElement('div');
+                          fileIcon.className = 'w-10 h-10 bg-gray-200 dark:bg-gray-600 rounded flex items-center justify-center';
+                          fileIcon.innerHTML = '📄';
+                          previewContainer.appendChild(fileIcon);
+                        }
+
+                        // Add file info (name & size)
+                        const fileInfo = document.createElement('div');
+                        fileInfo.className = 'flex-1';
+                        fileInfo.innerHTML = `
+                          <div class="text-sm font-medium text-gray-900 dark:text-white">${file.name}</div>
+                          <div class="text-xs text-gray-500 dark:text-gray-400">${(file.size/1024).toFixed(1)} KB</div>
+                        `;
+                        previewContainer.appendChild(fileInfo);
+
+                        // Add a remove button so the user can delete the attachment if needed
+                        const removeBtn = document.createElement('button');
+                        removeBtn.className = 'text-red-500 hover:text-red-700';
+                        removeBtn.innerHTML = '✕';
+                        removeBtn.onclick = function() {
+                          fileInput.value = '';
+                          previewContainer.remove();
+                          fileData = null;
+                          previewContainer = null;
+                          formData.delete('file');
+                        };
+                        previewContainer.appendChild(removeBtn);
+
+                        // Insert the preview container before the textarea
+                        text_area.parentNode.insertBefore(previewContainer, text_area);
+                        
+                        // Adjust the textarea height to accommodate the preview
+                        text_area.style.height = 'auto';
+                        text_area.style.height = (text_area.scrollHeight + previewContainer.offsetHeight) + 'px';
+                      } else {
+                        // If there is no file selected, clear the file data and reset the textarea height
+                        fileData = null;
+                        formData.delete('file');
+                        text_area.style.height = 'auto';
+                      }
+                    });
+                    
+                    // Handle newlines with shift+enter without interfering with the height adjustment
+                    text_area.addEventListener('keydown', function(e) {
+                      if (e.shiftKey && (e.key === 'Enter' || e.keyCode === 13)) {
+                        e.preventDefault();
+                        const start = text_area.selectionStart;
+                        const end = text_area.selectionEnd;
+                        const currentValue = text_area.value;
+                        text_area.value = currentValue.substring(0, start) + '\n' + currentValue.substring(end);
+                        text_area.selectionStart = text_area.selectionEnd = start + 1;
+                        text_area.style.height = 'auto';
+                        text_area.style.height = text_area.scrollHeight + 'px';
+                        if (previewContainer) {
+                          text_area.style.height = (text_area.scrollHeight + previewContainer.offsetHeight) + 'px';
+                        }
+                      }
+                    });
+                    
+                    // Adjust the textarea height on input
+                    text_area.addEventListener('input', function() {
+                      this.style.height = 'auto';
+                      this.style.height = this.scrollHeight + 'px';
+                      if (previewContainer) {
+                        this.style.height = (this.scrollHeight + previewContainer.offsetHeight) + 'px';
+                      }
+                    });
+                  });
+                </script>
+                  
+                
+                <button id="web-search-btn" type="button" class="inline-flex items-center px-2 sm:px-5 py-2 sm:ml-3 sm:py-3 text-gray-900 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-full text-[10px] sm:text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 active:bg-blue-500 active:text-white" onclick="this.classList.toggle('bg-blue-500'); this.classList.toggle('text-white');">
+                    <img src="{% static 'images/web.png' %}" alt="Search" class="w-4 sm:w-5 h-4 sm:h-5 mr-1 sm:mr-2 filter invert">
+                    <span class="text-[8px] sm:text-xs">Web Search <span class="text-white">♾️</span> DeepThinking</span>
+                    <img src="{% static 'images/bulb.png' %}" alt="Search" class="w-4 sm:w-5 h-4 sm:h-5 mr-1 sm:mr-2 filter invert">
+                </button>
+
+                {% comment %} <button type="button" class="inline-flex items-center px-4 py-2 text-gray-900 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-full text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                    <img src="{% static 'images/bulb.png' %}" alt="Reason" class="w-5 h-5 mr-2 filter invert">
+                    <span class="text-xs">DeepThinking</span>
+                </button> {% endcomment %}
+                <div class="relative inline-flex items-center px-2 sm:px-4 py-2 text-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-full text-[10px] dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:focus:ring-gray-700">
+                  <img src="{% static 'images/atom.png' %}" alt="Model" class="w-4 sm:w-5 h-4 sm:h-5 mr-1 sm:mr-2 filter invert">
+                  <span class="text-[10px] hidden sm:inline">Model Choice</span>
+                  <div class="custom-select ml-1 sm:ml-2 w-28 sm:w-36 ">
+                    <div class="select-display appearance-none bg-transparent border-none text-gray-700 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-full dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 px-2 sm:px-4 py-1 sm:py-2 pr-6 sm:pr-8 cursor-pointer">
+                      <span class="selected-option text-[8px] sm:text-[10px]">C.A.L.I.S.T.A</span>
+                    </div>
+                    <select class="hidden" id="model-select" >
+                      <option value="calista:latest" data-img="{% static 'images/Logo.png' %}" selected>C.A.L.I.S.T.A</option>
+                      <option value="Deepseek R1 (1.5B)" data-img="{% static 'images/deepseek.png' %}">Deepseek R1 (1.5B)</option>
+                      <option value="Deepseek R1 (8B)" data-img="{% static 'images/deepseek.png' %}">Deepseek R1 (8B)</option>
+                      <option value="Qwen2.5 (3B)" data-img="{% static 'images/qween.png' %}">Qwen2.5 (3B)</option>
+                      <option value="Llama 3.1 (8B)" data-img="{% static 'images/metaa.png' %}">Llama 3.1 (8B)</option>
+                      <option value="Llama 3.2 (3B)" data-img="{% static 'images/metaa.png' %}">Llama 3.2 (3B)</option>
+                      <option value="Phi-4 (14B)" data-img="{% static 'images/metaa.png' %}">Phi-4 (14B)</option>
+                      <option value="Gemma 2 (9B)" data-img="{% static 'images/Google.png' %}">Gemma 2 (9B)</option>
+                      <option value="Mistral v0.3 (7B)" data-img="{% static 'images/mistral.png' %}">Mistral v0.3 (7B)</option>
+                      <option value="Llama 3.2 Vision (11B)" data-img="{% static 'images/metaa.png' %}">Llama 3.2 Vision (11B)</option>
+                      <option value="Janus Pro (7B)" data-img="{% static 'images/deepseek.png' %}">Janus Pro (7B)</option>
+                      <option value="Janus (1.3B)" data-img="{% static 'images/deepseek.png' %}">Janus (1.3B)</option>
+                    </select>
+                    <svg id="icon2" class="transform transition-transform duration-500 ease-in-out absolute ml-20 sm:ml-28 top-1/2 -translate-y-1/2 cursor-pointer w-4 sm:w-6 h-4 sm:h-6" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <div class="custom-options hidden w-40 sm:w-52 mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg max-h-48 overflow-y-auto z-50" style="top: 100%; position: absolute; left: 0;">
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="conversation-wrapper"></div>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('add-btn').addEventListener('click', function() {
+        console.log('add button clicked');
+    });
+</script>
+
+<script src="{% static 'js/model_run.js' %}"></script>
+
+
+<script src="{% static 'js/model_post.js' %}"></script>

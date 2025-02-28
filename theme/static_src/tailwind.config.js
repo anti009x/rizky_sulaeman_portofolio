@@ -40,13 +40,15 @@ module.exports = {
          * and make sure the pattern below matches your project structure.
          */
         // '../../**/*.py'
+
     ],
+
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Source Code Pro', ' sans-serif'],
-            },
-        },
+                sans: ['Source Code Pro', 'sans-serif']
+            }
+        }
     },
     plugins: [
         /**
@@ -54,8 +56,10 @@ module.exports = {
          * for forms. If you don't like it or have own styling for forms,
          * comment the line below to disable '@tailwindcss/forms'.
          */
+
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
-    ],
+        require('tailwind-scrollbar-hide')
+    ]
 }

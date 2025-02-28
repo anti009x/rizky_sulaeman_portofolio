@@ -1,0 +1,655 @@
+{% load static %}
+
+<style>
+    @media (max-width: 640px) {
+        /* Make sure the content doesn't overflow its container */
+        #conversation-wrapper .response-container-user .user-message,
+        #conversation-wrapper .ai_response-container .ai_message-text {
+          white-space: normal;
+          overflow-wrap: break-word;
+          word-break: break-word;
+        }
+      }
+</style>
+
+
+<div class="jumbotron h-screen bg-gradient-to-br from-gray-50 dark:from-gray-800 to-blue-100 dark:to-gray-900 bg-stone-950 min-h-screen flex items-center mt-12 md:mt-5 shadow-[0_-50px_50px_-15px] shadow-cyan-300">
+    <div class="container mx-auto flex flex-col items-center justify-center px-4 sm:px-8 gap-8 md:gap-32">
+         <div class="w-full text-center">
+            <div id="mainContainer" class="flex flex-col h-screen">
+                <div id="scrollable-container" class="flex-grow space-y-4 p-4 overflow-y-auto w-full" style="max-height: calc(100vh - 2rem); ">
+                  <div class="flex flex-col space-y-4 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+              
+                    {% comment %} <div class="flex items-start gap-10">
+                      <img src="{% static 'images/calista.png' %}" alt="Calista avatar" class="w-10 h-10 rounded-full flex-shrink-0 border-2 border-indigo-300">
+                      <div class="bg-gradient-to-r from-green-300 to-blue-300 text-gray-900 rounded-lg px-4 py-2 max-w-[80%] shadow-lg transform transition duration-300 hover:scale-105">
+                        <span class="text-sm font-semibold">
+                          
+                        </span>
+                      </div>
+                    </div> {% endcomment %}
+              
+                    <!-- Container for user messages -->
+                    {% comment %} <div id="conversation-wrapper" class="space-y-8"></div>
+                    <template id="response-template_user" style="display: none;">
+                      <div class="flex justify-end items-center gap-2 response-container-user my-8" >
+                        <button id="edit-button" onclick="editMessage(this)" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full p-2 hover:opacity-80 transition">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                          </svg>
+                        </button>
+                        <div class="bg-gradient-to-r from-indigo-500 to-cyan-500 text-white rounded-lg px-4 py-2 max-w-[80%] shadow-lg transform transition duration-300 hover:scale-105">
+                          <span class="text-sm font-semibold user-message" contenteditable="false" data-edit-mode="false" onkeydown="if(event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); if(!this.textContent.trim()) return; editMessage(this.closest('.response-container-user').querySelector('#edit-button')); }">
+       
+                          </span>
+                        </div>
+                      </div>
+                    </template>
+ {% endcomment %}
+
+                        <!-- Container for user messages -->
+                        <div id="conversation-wrapper" class="space-y-8"></div>
+                        <template id="response-template_user" style="display: none;">
+                          <div class="flex justify-end items-center gap-2 response-container-user my-8" >
+                                <div class=" h-full w-full relative max-w-sm">
+                                  <div class="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] bg-red-500 rounded-full blur-3xl"></div>
+                                  <div class="relative shadow-xl bg-gray-900 border border-gray-800 px-4 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-end items-start">
+                                    <button class="h-5 w-5 rounded-full border flex items-center justify-center mb-4 border-gray-500 id="edit-button" onclick="editMessage(this)" ">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        class="h-2 w-2 text-gray-300"
+                                      >
+                                        <path
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          d="M4.5 4.5l15 15m0 0V8.25m0 11.25H8.25"
+                                        />
+                                      </svg>
+                                    </button>
+                                    {% comment %} <h1 class="font-bold text-xl text-white mb-4 relative z-50">
+                                      
+                                    </h1> {% endcomment %}
+                           
+
+                                    <span class="font-normal text-sm md:text-base text-slate-500 mb-4 relative text-justify user-message contenteditable="false" data-edit-mode="false" onkeydown="if(event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); if(!this.textContent.trim()) return; editMessage(this.closest('.response-container-user').querySelector('#edit-button')); }" "></span>
+                                    {% comment %} <button class="border px-4 py-1 rounded-lg border-gray-500 text-gray-300">
+                                      Explore
+                                    </button> {% endcomment %}
+                                    
+                                    <!-- Meteor Effect -->
+                                    <div class="meteor-shower absolute inset-0 overflow-hidden pointer-events-none">
+                                      {% with ''|center:20 as range %}
+                                        {% for _ in range %}
+                                          <div class="meteor-container absolute">
+                                            <div class="meteor"></div>
+                                          </div>
+                                        {% endfor %}
+                                      {% endwith %}
+                                    </div>
+                                  </div>
+                                </div>
+                          </div>
+                        </template>
+                        
+                    <!-- Container for AI responses -->
+                    {% comment %} <div id="conversation-wrapper" class="space-y-8"></div>
+                    
+                    <!-- Response container template -->
+                    <template id="ai_response-template">
+                      <div class="flex items-start gap-10 ai_response-container my-8" style="display: none;">
+                        <img src="{% static 'images/calista.png' %}" alt="Calista avatar" class="w-10 h-10 rounded-full flex-shrink-0 border-2 border-indigo-300">
+                        <div class="bg-gradient-to-r to-slate-700 text-gray-900 rounded-lg px-4 py-2 max-w-[80%] shadow-lg transform transition duration-300 hover:scale-105">
+                          <button onclick="copyText(this)" class="bg-gradient-to-r to-gray-800 text-white rounded-full p-2 hover:opacity-80 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                            </svg>
+                          </button>
+                          <br>
+                          <span class="text-sm font-semibold whitespace-pre-wrap text-blue-400 ai_message-text"> </span>
+                          <span class="text-sm font-semibold whitespace-pre-wrap text-blue-400 "></span>
+                          <br>
+                        </div>
+                      </div>
+                    </template>
+                  </div> {% endcomment %}
+
+
+
+
+                  <div id="conversation-wrapper" class="space-y-8 px-4 md:px-8"></div>
+                    
+                  <!-- Response container template -->
+                  <template id="ai_response-template">
+                    <div class="flex flex-col md:flex-row items-start gap-4 md:gap-10 ai_response-container my-8" style="display: none;">
+                      <img src="{% static 'images/calista.png' %}" alt="Calista avatar" class="w-8 h-8 md:w-10 md:h-10 rounded-full flex-shrink-0 border-2 border-indigo-300">
+                      <div class="w-full h-full relative">
+                        <div class="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] rounded-full blur-3xl"></div>
+                        <div class="relative shadow-xl w-full md:max-w-[80%] bg-gray-900 border border-gray-800 px-4 py-6 sm:px-6 sm:py-8 overflow-hidden rounded-2xl flex flex-col justify-end items-start">
+                          <button onclick="copyText(this)" class="bg-gradient-to-r to-gray-800 text-white rounded-full p-2 hover:opacity-80 transition mb-4 mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                            </svg>
+                          </button>
+                          <span class="font-normal text-sm md:text-base text-slate-500  leading-relaxed tracking-wide whitespace-pre-wrap break-words w-full ai_message-text mb-4"></span>
+                          <span class="font-normal text-sm md:text-base text-slate-500  leading-relaxed tracking-wide whitespace-pre-wrap break-words w-full mb-4"></span>
+                          
+                          <!-- Meteor Effect -->
+                          <div class="meteor-shower absolute inset-0 overflow-hidden pointer-events-none">
+                            {% with ''|center:20 as range %}
+                              {% for _ in range %}
+                                <div class="meteor-container absolute">
+                                  <div class="meteor"></div>
+                                </div>
+                              {% endfor %}
+                            {% endwith %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+              
+                  <script>
+                    const scrollableContainer = document.getElementById('scrollable-container');
+                    let lastScrollTop = scrollableContainer.scrollTop;
+                    
+                    // Function to scroll to bottom
+                    function scrollToBottom() {
+                      scrollableContainer.scrollTop = scrollableContainer.scrollHeight;
+                    }
+              
+                    // Initial scroll to bottom
+                    scrollToBottom();
+              
+                    // Create observer to watch for new messages
+                    const conversationObserver = new MutationObserver((mutations) => {
+                      mutations.forEach((mutation) => {
+                        if (mutation.addedNodes.length > 0) {
+                          // If new nodes are added, scroll to bottom
+                          scrollToBottom();
+                        }
+                      });
+                    });
+              
+                    // Start observing the conversation wrapper for changes
+                    const conversationWrapper = document.getElementById('conversation-wrapper');
+                    conversationObserver.observe(conversationWrapper, {
+                      childList: true,
+                      subtree: true
+                    });
+                    
+                    scrollableContainer.addEventListener('scroll', () => {
+                      const currentScrollTop = scrollableContainer.scrollTop;
+                      if (currentScrollTop > lastScrollTop) {
+                        console.log('Scrolling down');
+                      } else if (currentScrollTop < lastScrollTop) {
+                        console.log('Scrolling up');
+                      }
+                      lastScrollTop = currentScrollTop;
+                    });
+                  </script>
+              
+                  <script>
+                    (function() {
+                      const spanEl = document.getElementById('message-text');
+                      const text = spanEl.textContent;
+                      if (text.length > 110) {
+                        let formatted = '';
+                        for (let i = 0; i < text.length; i += 110) {
+                          formatted += text.substring(i, i + 110) + (i + 110 < text.length ? '<br>' : '');
+                        }
+                        spanEl.innerHTML = formatted;
+                      }
+                    })();
+                  </script>
+                </div>
+              
+              
+                <!-- Fixed Open Modal Button -->
+              
+              
+                <!-- Colorful Modal -->
+                <div id="colorfulModal" class="fixed inset-0 hidden flex items-center justify-center z-50">
+                  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+                  <div class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg p-6 shadow-xl max-w-md mx-auto">
+                    <h2 class="text-2xl font-bold text-white mb-4">Colorful Modal</h2>
+                    <p class="text-white">This modal is bursting with colors to make it more interesting!</p>
+                    <button id="closeModal" class="mt-4 bg-white text-indigo-600 font-semibold px-4 py-2 rounded hover:bg-gray-200">Close</button>
+                  </div>
+                </div>
+              
+              
+              
+
+                <footer class="">
+                  {% include 'chat_footer.html' %}
+                </footer>
+              
+              
+              
+                {% comment %} <div >
+                  {% include 'code_simulation.html' %}
+                </div> {% endcomment %}
+
+              
+              </div>
+         </div>
+    </div>
+</div>
+
+<script>
+    // Global helper to fetch CSRF token (make sure it's available in the global scope)
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+  
+    // Function to submit an edited message to the server
+    function submitEditedMessage(message) {
+      const chatInput = document.getElementById('chat-input');
+      const submitButton = chatInput ? chatInput.nextElementSibling : null;
+      if (!message) return;
+      const modelSelect = document.getElementById('model-select');
+      const selectedModel = modelSelect.value;
+      if (!selectedModel || selectedModel === "Select") {
+        alert("Please manually select a model before sending a message");
+        return;
+      }
+      // Assumes getNewResponseContainer() is globally available to create the bot response container.
+      // Relies on a global 'webSearchEnabled' variable that is set up elsewhere (e.g., on page load)
+      if (!webSearchEnabled) {
+        const targetElementNormal = getNewResponseContainer();
+        fetch('/send_message/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    message: message,
+                    model: selectedModel
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Selected model not found or unavailable. Please choose another model.');
+                }
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder('utf-8');
+  
+                function read() {
+                    return reader.read().then(({ done, value }) => {
+                        if (done) {
+                            chatInput.style.height = 'auto';
+                            return;
+                        }
+                        let text = decoder.decode(value, { stream: true });
+                        if (targetElementNormal) {
+                            targetElementNormal.textContent += text;
+                            targetElementNormal.closest('.ai_response-container').style.display = 'flex';
+                        }
+                        return read();
+                    });
+                }
+                return read();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+   
+            });
+      } else {
+        const targetElementWebSearch = getNewResponseContainer();
+        fetch('/send_message_web_search/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    message: message,
+                    model: selectedModel
+                })
+            })
+            .then(final_response => {
+                if (!final_response.ok) {
+                    throw new Error('Selected model not found or unavailable. Please choose another model.');
+                }
+                const reader = final_response.body.getReader();
+                const decoder = new TextDecoder('utf-8');
+  
+                function read() {
+                    return reader.read().then(({ done, value }) => {
+                        if (done) {
+                            chatInput.style.height = 'auto';
+                            const accumulatedText = targetElementWebSearch.textContent;
+                            const linkRegex = /(https:\/\/[^\s]+)/g;
+                            const matches = [...accumulatedText.matchAll(linkRegex)];
+                            if (matches.length > 0) {
+                                const cleanedText = accumulatedText.replace(linkRegex, '');
+                                targetElementWebSearch.textContent = cleanedText;
+                                const textElements = document.querySelectorAll('.ai_message-text');
+  
+                                const uniqueLinks = new Set(matches.map(match => match[0]));
+                                textElements.forEach(el => {
+                                    uniqueLinks.forEach(link => {
+                                        try {
+                                            if (!el.querySelector(`a[href="${link}"]`)) {
+                                                const a = document.createElement('a');
+                                                a.href = link;
+                                                a.textContent = link;
+                                                a.target = '_blank';
+                                                el.appendChild(a);
+                                                el.appendChild(document.createElement('br'));
+                                            }
+                                        } catch (error) {
+                                            console.error('Error:', error);
+                                        }
+                                    });
+                                });
+                            }
+                            return;
+                        }
+                        let text = decoder.decode(value, { stream: true });
+                        if (targetElementWebSearch) {
+                            targetElementWebSearch.textContent += text;
+                            targetElementWebSearch.closest('.ai_response-container').style.display = 'flex';
+                        }
+                        return read();
+                    });
+                }
+                return read();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+  
+            });
+      }
+    }
+  
+    // Updated editMessage function for the edit button
+    function editMessage(button) {
+      const container = button.closest('.response-container-user');
+      const messageSpan = container.querySelector('.user-message');
+      
+      // If the span is already editable, that means the user is finishing editing.
+      // Disable editing and submit the updated message.
+      if (messageSpan.getAttribute('contenteditable') === 'true') {
+        messageSpan.setAttribute('contenteditable', 'false');
+        messageSpan.blur();
+        // Send the edited message to /send_message/
+        submitEditedMessage(messageSpan.textContent.trim());
+      } else {
+        // If not in editing mode, enable editing.
+        messageSpan.setAttribute('contenteditable', 'true');
+        messageSpan.style.outline = 'none';
+        messageSpan.focus();
+  
+        // Move the caret to the end of the content.
+        const range = document.createRange();
+        range.selectNodeContents(messageSpan);
+        range.collapse(false);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+  </script>
+  
+  
+  <script>
+    function copyText(button) {
+      const textElement = button.parentElement.querySelector('.message-text');
+      const text = textElement.textContent;
+      
+      navigator.clipboard.writeText(text.trim()).then(() => {
+        // Show a temporary success message
+        const originalBg = button.className;
+        button.className = "bg-green-500 text-white rounded-full p-2";
+        button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>`;
+        
+        setTimeout(() => {
+          button.className = originalBg;
+          button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+          </svg>`;
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+  </script>
+  
+  
+  
+  
+  <script>
+    const sidebar = document.getElementById('codeSimulationSidebar');
+    const sidebar2 = document.getElementById('codeSimulationSidebar2');
+    const closeButton3 = document.getElementById('closeSidebarBtn3');
+    const closeButton4 = document.getElementById('closeSidebarBtn4');
+    const closeButton = document.getElementById('closeSidebarBtn');
+    const closeButton2 = document.getElementById('closeSidebarBtn2');
+    const mainContainer = document.getElementById('mainContainer');
+    let isOpen = false;
+    let isOpen2 = false;
+  
+    // Initially hide the buttons
+    closeButton.style.display = 'none';
+    closeButton3.style.display = 'none';
+  
+    function toggleSidebar(sidebarEl, isOpenFlag, button) {
+      if (!isOpenFlag) {
+        sidebarEl.classList.remove('translate-x-full');
+        mainContainer.classList.add('pr-[32rem]');
+        button.style.right = 'calc(1.5rem + 40rem)';
+        return true;
+      } else {
+        sidebarEl.classList.add('translate-x-full');
+        mainContainer.classList.remove('pr-[32rem]');
+        button.style.right = '';
+        return false;
+      }
+    }
+  
+    closeButton.addEventListener('click', () => {
+      isOpen = toggleSidebar(sidebar, isOpen, closeButton);
+    });
+  
+    closeButton2.addEventListener('click', () => {
+      isOpen = toggleSidebar(sidebar, isOpen, closeButton);
+    });
+  
+    closeButton3.addEventListener('click', () => {
+      isOpen2 = toggleSidebar(sidebar2, isOpen2, closeButton3);
+    });
+  
+    closeButton4.addEventListener('click', () => {
+      isOpen2 = toggleSidebar(sidebar2, isOpen2, closeButton3);
+    });
+  </script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" />
+
+  
+  
+  <style>
+    /* Add this to your static/css/meteor.css file */
+
+    .meteor-shower {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    
+    .meteor-container {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      top: 50%;
+      left: 50%;
+      pointer-events: none;
+      overflow: hidden;
+      transform: rotate(215deg);
+    }
+    
+    .meteor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+      animation: meteor-fall 3s linear infinite;
+      animation-delay: calc(var(--delay) * 1s);
+      transform: translateX(0);
+    }
+    
+    @keyframes meteor-fall {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-300px);
+        opacity: 0;
+      }
+    }
+</style>
+
+<script>
+    function initMeteors() {
+        const meteorContainers = document.querySelectorAll('.meteor-container');
+        
+        meteorContainers.forEach(container => {
+            // Random starting position from any side
+            const side = Math.floor(Math.random() * 4);
+            let x, y;
+            switch(side) {
+                case 0: // Top
+                    x = Math.random() * 100;
+                    y = 0;
+                    container.style.left = `${x}%`;
+                    container.style.top = '0';
+                    break;
+                case 1: // Right
+                    x = 100;
+                    y = Math.random() * 100;
+                    container.style.right = '0';
+                    container.style.top = `${y}%`;
+                    break;
+                case 2: // Bottom
+                    x = Math.random() * 100;
+                    y = 100;
+                    container.style.left = `${x}%`;
+                    container.style.bottom = '0';
+                    break;
+                case 3: // Left
+                    x = 0;
+                    y = Math.random() * 100;
+                    container.style.left = '0';
+                    container.style.top = `${y}%`;
+                    break;
+            }
+            
+            // Random delay between 0-2s
+            const delay = Math.random() * 2;
+            const meteor = container.querySelector('.meteor');
+            meteor.style.setProperty('--delay', delay);
+            
+            // Random duration between 1-3s
+            const duration = 1 + Math.random() * 2;
+            meteor.style.animationDuration = `${duration}s`;
+            
+            // Set animation direction based on starting position
+            let directionX, directionY;
+            switch(side) {
+                case 0: // Top to bottom
+                    directionX = Math.random() < 0.5 ? -1 : 1;
+                    directionY = 1;
+                    break;
+                case 1: // Right to left
+                    directionX = -1;
+                    directionY = Math.random() < 0.5 ? -1 : 1;
+                    break;
+                case 2: // Bottom to top
+                    directionX = Math.random() < 0.5 ? -1 : 1;
+                    directionY = -1;
+                    break;
+                case 3: // Left to right
+                    directionX = 1;
+                    directionY = Math.random() < 0.5 ? -1 : 1;
+                    break;
+            }
+            
+            // Reset animation when it ends
+            meteor.addEventListener('animationend', () => {
+                // Randomly choose a new side for the next animation
+                const newSide = Math.floor(Math.random() * 4);
+                let newX, newY;
+                switch(newSide) {
+                    case 0: // Top
+                        newX = Math.random() * 100;
+                        newY = 0;
+                        container.style.left = `${newX}%`;
+                        container.style.top = '0';
+                        break;
+                    case 1: // Right
+                        newX = 100;
+                        newY = Math.random() * 100;
+                        container.style.right = '0';
+                        container.style.top = `${newY}%`;
+                        break;
+                    case 2: // Bottom
+                        newX = Math.random() * 100;
+                        newY = 100;
+                        container.style.left = `${newX}%`;
+                        container.style.bottom = '0';
+                        break;
+                    case 3: // Left
+                        newX = 0;
+                        newY = Math.random() * 100;
+                        container.style.left = '0';
+                        container.style.top = `${newY}%`;
+                        break;
+                }
+                const newDelay = Math.random() * 2;
+                meteor.style.setProperty('--delay', newDelay);
+                void meteor.offsetWidth; // Trigger reflow
+            });
+        });
+    }
+    
+    // Run initMeteors when DOM is ready
+    if(document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMeteors);
+    } else {
+      initMeteors();
+    }
+
+    // Re-run initMeteors periodically to ensure meteors keep moving
+    setInterval(initMeteors, 5000);
+</script>
+
+
+  <!-- Before </body> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-python.min.js"></script>
