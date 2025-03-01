@@ -131,10 +131,10 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 #local
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-NPM_BIN_PATH = 'C:/Users/Rizky Sulaeman/AppData/Roaming/npm/npm.cmd'
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+# NPM_BIN_PATH = 'C:/Users/Rizky Sulaeman/AppData/Roaming/npm/npm.cmd'
 #vercel
-# NPM_BIN_PATH = '/usr/bin/npm'
-# STATIC_ROOT = BASE_DIR / "static"
+NPM_BIN_PATH = '/usr/bin/npm'
+STATIC_ROOT = BASE_DIR / "static"
