@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "main_base.html" %}
 
 {% block content %}
 
@@ -7,6 +7,12 @@
 {% include "education.html" %}
 {% include "stacktechnology.html" %}
 {% include "project.html" %}
-{% include "calista.html" %}
+
+<div id="calista-section">
+    {% include "calista.html" %}
+</div>
+<div id="contact-section">
+    {% include "contact.html" %}
+</div>
 
 {% endblock content %}

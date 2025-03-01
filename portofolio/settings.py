@@ -135,4 +135,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-NPM_BIN_PATH = 'C:/Users/Rizky Sulaeman/AppData/Roaming/npm/npm.cmd'
+# NPM_BIN_PATH = 'C:/Users/Rizky Sulaeman/AppData/Roaming/npm/npm.cmd'
+NPM_BIN_PATH = '/usr/bin/npm'
+# STATIC_ROOT = BASE_DIR / "static"

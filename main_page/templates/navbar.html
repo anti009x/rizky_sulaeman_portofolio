@@ -1,8 +1,21 @@
 {% load static %}
 
+<style>
+      .navbar-container {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        overflow: hidden;
+        padding: 0;
+      }
+</style>
 
 
-<nav class="bg-gradient-to-br from-gray-50 dark:from-gray-800 to-blue-100 dark:to-gray-900  ">
+
+
+<nav class="navbar-container bg-gradient-to-br from-gray-50 dark:from-gray-800 to-blue-100 dark:to-gray-900">
   <div class=" flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="{% static 'images/logo.png' %}" class=" md:h-1/6 md:w-1/6 h-12 w-12 rounded-full ring-2 ring-sky-950 shadow-lg shadow-blue-950 " alt="Flowbite Logo" />
@@ -17,22 +30,24 @@
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-6 rtl:space-x-reverse md:mt-0 text-center ">
         <li>
-          <a href="#" class="block py-2 px-3 bg-blue-700 text-white rounded-lg md:p-2 text-center md:text-2xl shadow-lg shadow-blue-500/50"  aria-current="page"> Home </a>
+          <a href="javascript:void(0)" onclick="document.getElementById('jumbotron').scrollIntoView({behavior: 'smooth'})" class="block py-2 px-3 bg-blue-700 text-white rounded-lg md:p-2 text-center md:text-2xl shadow-lg shadow-blue-500/50"  aria-current="page"> Home </a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Education</a>
+          <a href="javascript:void(0)" onclick="document.getElementById('education-section').scrollIntoView({behavior: 'smooth'})" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Education</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Experience</a>
+          <a href="javascript:void(0)" onclick="document.getElementById('stack-technology-section').scrollIntoView({behavior: 'smooth'})" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Stack Technology</a>
+        </li>
+        
+        <li>
+          <a href="javascript:void(0)" onclick="document.getElementById('project-section').scrollIntoView({behavior: 'smooth'})" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Experience</a>
+        </li>
+  
+        <li>
+          <a href="javascript:void(0)" onclick="document.getElementById('calista-section').scrollIntoView({behavior: 'smooth'})" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Calista</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Stack Technology</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Project</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Certification</a>
+          <a href="javascript:void(0)" onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})" class="block py-2 px-3 text-white md:p-2 md:text-2xl text-center shadow-lg shadow-blue-500/50">Contact</a>
         </li>
       </ul>
     </div>
