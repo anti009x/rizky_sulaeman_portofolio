@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-1zrfnu6un0!%_ritv7u-ky$9gv6u$6tyioi03wa-s1)iy8nm5e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["rizky-sulaeman-portofolio.vercel.app",'localhost','127.0.0.1']
+ALLOWED_HOSTS = ["rizky-sulaeman-portofolio-git-main-anti009xs-projects.vercel.app",'localhost','127.0.0.1']
 
 
 # Application definition
@@ -131,10 +131,10 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
 
 # NPM_BIN_PATH = 'C:/Users/Rizky Sulaeman/AppData/Roaming/npm/npm.cmd'
 NPM_BIN_PATH = '/usr/bin/npm'
-# STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / "static"
